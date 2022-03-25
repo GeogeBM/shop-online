@@ -22,13 +22,9 @@ namespace shopInlineApi.Controllers
 
         // GET: api/Departements
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<object>>> GetDepartements()
+        public async Task<ActionResult<IEnumerable<Departement>>> GetDepartements()
         {
-      var departamenst = await _context.Departements.Join(_context.SubDepartaments,
-                                              dep => dep.DepartamentId,
-                                              sub => sub.Departament.DepartamentId,
-                                              (dep, sub) => new { Departament = dep, SubDepartament = sub }).ToListAsync();
-      return Ok(departamenst);
+           return await _context.Departements.ToListAsync();
         }
 
         // GET: api/Departements/5

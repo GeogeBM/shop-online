@@ -12,6 +12,11 @@ import { BoyIndexComponent } from './components/boy/boy-index/boy-index.componen
 import { GirlIndexComponent } from './components/girl/girl-index/girl-index.component';
 import { CardComponent } from './common/card/card.component';
 import { LoadComponent } from './dashboard/load/load.component';
+
+import { ProductoService } from './services/producto/producto.service';
+
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms'
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,9 +32,14 @@ import { LoadComponent } from './dashboard/load/load.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClient,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    ProductoService
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

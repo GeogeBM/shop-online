@@ -29,15 +29,19 @@ namespace shopInlineApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-      var coneccion = Configuration.GetConnectionString("shopInlineDB");
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "shopInlineApi", Version = "v1" });
-            });
+      services.AddControllers();
+      services.AddDbContext<Shop_OnlineContext>(options =>
+                                              options.UseSqlServer(Configuration.GetConnectionString("shopInlineDB")));
 
-      services.AddDbContext<Shop_OnlineContext>(options => options.UseSqlServer(coneccion));
-      services.AddControllersWithViews();
+      services.AddCors(c => {
+        c.AddPolicy("AlowOrigin", options => options.AllowAnyOrigin());
+      });
+
+      services.AddSwaggerGen(c => {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "shopInlineApi", Version = "v1" });
+      });
+
+      
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +60,10 @@ namespace shopInlineApi
 
             app.UseAuthorization();
 
+      app.UseCors(options => options
+                          .AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

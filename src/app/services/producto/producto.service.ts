@@ -8,6 +8,6 @@ export class ProductoService {
 
   private BASE_URL = 'https://localhost:44388/api/';
   constructor(
-    private http:HttpClient
+    //private http:HttpClient
   ) { }
 }

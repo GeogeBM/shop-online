@@ -15,14 +15,22 @@
                     </div>
                     <div class="row form-group">
                             <label class="col-sm-col-form-label">Departamento: </label>
-                            <div>
-                                <input type="text" class="form-control" id="producto" name="producto" />
+                            <div>                                
+                                <select class="form-select" id="departament" name="departament" (change)="changeDepartament($event)">
+                                     <option  [ngValue]="null" disabled></option>
+                                     <option  [ngValue]="" selected>Seleccionar departamento</option>
+                                      <option [ngValue]="item.departamentId" *ngFor="let item of departamnets">{{item.departamentDescripcion}}</option>
+                                </select>
                             </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-col-form-label">Sub Departamento: </label>
                         <div>
-                            <input type="text" class="form-control" id="producto" name="producto" />
+                            <select class="form-select" id="subDepartament" name="subDepartament">
+                                <option [ngValue]="null" disabled></option>
+                                <option [ngValue]="" selected>Seleccionar departamento</option>
+                                <option [ngValue]="item.subDepartamentId" *ngFor="let item of subdepartements">{{item.subDepartamentDesc}}</option>
+                          </select>
                         </div>
                     </div>        
                     <div class="row form-group">
@@ -34,7 +42,11 @@
                     <div class="row form-group">
                         <label class="col-sm-col-form-label">Marca: </label>
                         <div>
-                            <input type="text" class="form-control" id="producto" name="producto" />
+                            <select class="form-select" id="marca" name="marca">
+                                <option [ngValue]="null" disabled></option>
+                                <option [ngValue]="" selected>Seleccionar Marca</option>
+                                <option [ngValue]="item.marcaId" *ngFor="let item of marcasList">{{item.marcaDesc}}</option>
+                          </select>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -67,9 +79,11 @@
                         <input type="number" class="form-control" id="producto" name="producto" />
                     </div>
                  </div>
-                 <div class="row">
-                    <button type="button" class="btn btn-outline-danger ">Cancelar</button>
-                    <button type="button" class="btn btn-outline-primary ">Agregar</button>
+                 <div class="row form-group  ">
+                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-outline-danger ">Cancelar</button>
+                        <button type="button" class="btn btn-outline-primary ">Agregar</button>
+                     </div>
                  </div>
                 </form>
             </div>

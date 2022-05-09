@@ -6,6 +6,9 @@ import { Marca } from 'src/app/models/marca';
 import { DepartamentService } from 'src/app/services/carga/departament.service';
 import { SubDepartamentService } from 'src/app/services/carga/subdepartament.service';
 import { MarcaService } from 'src/app/services/carga/marca.service';
+
+import { Producto } from 'src/app/models/producto';
+import { ProductoService } from './producto.service';
 @Component({
   selector: 'app-load',
   templateUrl: './load.component.html',
@@ -16,13 +19,28 @@ export class LoadComponent implements OnInit {
   departamnets: Departament[] = [];
   subdepartements: SubDepartament[] = [];
   marcasList: Marca[] = [];
-  
-  constructor(private departamentService: DepartamentService, private subdetapatamentsService: SubDepartamentService,private marcaService:MarcaService) { }
+  producto: string = '';
+  departamento: number = 0;
+  subdepartamento: number = 0;
+  descripcion: string = '';
+  marca: number = 0;
+  precioCompra: number = 0; 
+  precioVenta: number = 0;
+  impuesto: number = 0;
+  precioNeto: number = 0;
+  cantidad: number = 0;
+  productoModel: Producto =  new Producto();
+  constructor(
+    private departamentService: DepartamentService, 
+    private subdetapatamentsService: SubDepartamentService,
+    private marcaService:MarcaService,
+    private productoService:ProductoService) { }
 
   ngOnInit(): void {
     this.getDepartaments();
     this.getSubdepartaments();
     this.getMarcas();
+
   }
 
   getDepartaments(){
@@ -51,4 +69,28 @@ export class LoadComponent implements OnInit {
     console.log('el evento mandado es: ', e.target.value);
   }
 
+  //guardando el producto
+  saveProducto(event: any){
+    
+    this.productoModel.ProductoId = 0;
+
+    this.productoModel.ProductoNombre = this.producto;
+    this.productoModel.DepartamentId = this.departamento;
+    this.productoModel.SubDepartamentId = this.subdepartamento;
+    this.productoModel.ProductoDesc = this.descripcion;
+    this.productoModel.MarcaId = this.cantidad;
+    this.productoModel.PrecioCompra = this.precioCompra;
+    this.productoModel.PrecioBrutoVenta = this.precioVenta;
+    this.productoModel.ProductoImpuesto = this.impuesto;
+    this.productoModel.PrecioNetoVenta = this.precioNeto;
+    this.productoModel.ProductoCantidad = this.cantidad;
+
+    this.productoService.CreateProducto( this.productoModel).subscribe(data => {
+      console.log('se guardaton satsfactoriamente los datos');
+    }, (error) => {
+      console.log('Error: ', error)
+    });
+    
+    
+  }
 }

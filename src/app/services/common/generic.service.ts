@@ -19,7 +19,9 @@ export class GenericService
     }
     
     public postReques(url:string, params:any){
-        return this.Execute(HttpRequestType.POST,url,params);
+        console.log('url: ',url);
+        console.log('parametros: ',params);
+        return this.Execute(HttpRequestType.POST,url,params,params);
     }
     
     public putRequest(url:string, params:any){
@@ -42,16 +44,17 @@ export class GenericService
         //creando parametros
         let queryParams = new HttpParams({fromObject:params});
         
+        console.log('los parametros enviados antes de ejecutar ',queryParams);
         //iniciando headers
         let headers = new HttpHeaders();
-
+        headers = headers.set('Content-type', 'application/json');
         switch(requestType){
 
             case HttpRequestType.GET:
                 return this.httpClient.get(URL,{headers:headers, params: queryParams});
             
             case HttpRequestType.POST:
-                return this.httpClient.post(URL, {headers:headers, params: queryParams});
+                return this.httpClient.post(URL,data,{headers:headers, params: queryParams} );
                 
             case HttpRequestType.PUT:
                 return this.httpClient.put(url,{headers:headers, params:queryParams});

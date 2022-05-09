@@ -77,10 +77,10 @@ namespace shopInlineApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Departement>> PostDepartement(Departement departement)
         {
-            _context.Departements.Add(departement);
-            await _context.SaveChangesAsync();
+            //_context.Departements.Add(departement);
+            //await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDepartement", new { id = departement.DepartamentId }, departement);
+      return null;// CreatedAtAction("GetDepartement", new { id = departement.DepartamentId }, departement);
         }
 
         // DELETE: api/Departements/5

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -240,22 +240,22 @@ namespace shopInlineApi.Models
 
                 entity.Property(e => e.SubDepartamentId).HasColumnName("sub_departament_Id");
 
-                entity.HasOne(d => d.Departament)
-                    .WithMany(p => p.Productos)
-                    .HasForeignKey(d => d.DepartamentId)
-                    .HasConstraintName("FK__Producto__depart__5DCAEF64");
+                //entity.HasOne(d => d.Departament)
+                //    .WithMany(p => p.Productos)
+                //    .HasForeignKey(d => d.DepartamentId)
+                //    .HasConstraintName("FK__Producto__depart__5DCAEF64");
 
-                entity.HasOne(d => d.Marca)
-                    .WithMany(p => p.Productos)
-                    .HasForeignKey(d => d.MarcaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Producto__marca___619B8048");
+                //entity.HasOne(d => d.Marca)
+                //    .WithMany(p => p.Productos)
+                //    .HasForeignKey(d => d.MarcaId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK__Producto__marca___619B8048");
 
-                entity.HasOne(d => d.SubDepartament)
-                    .WithMany(p => p.Productos)
-                    .HasForeignKey(d => d.SubDepartamentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Producto__sub_de__5EBF139D");
+                //entity.HasOne(d => d.SubDepartament)
+                //    .WithMany(p => p.Productos)
+                //    .HasForeignKey(d => d.SubDepartamentId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK__Producto__sub_de__5EBF139D");
             });
 
             modelBuilder.Entity<Ropa>(entity =>

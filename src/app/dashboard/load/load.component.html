@@ -6,45 +6,45 @@
                 <h5>Agregar un producto</h5>
             </div>
             <div class="card card-body">
-                <form>
+                <form #form="ngForm" (ngSubmit)="saveProducto(form.value)">
                     <div class="row form-group">
-                            <label class="col-sm-col-form-label">Producto: </label>
-                            <div>
-                                <input type="text" class="form-control" id="producto" name="producto" />
-                            </div>
+                        <label class="col-sm-col-form-label">Producto: </label>
+                        <div>
+                            <input type="text" class="form-control" id="producto" name="producto" [(ngModel)]="producto" />
+                        </div>
                     </div>
                     <div class="row form-group">
-                            <label class="col-sm-col-form-label">Departamento: </label>
-                            <div>                                
-                                <select class="form-select" id="departament" name="departament" (change)="changeDepartament($event)">
+                        <label class="col-sm-col-form-label">Departamento: </label>
+                        <div>
+                            <select class="form-select" id="departamento" name="departamento" (change)="changeDepartament($event)" [(ngModel)]="departamento">
                                      <option  [ngValue]="null" disabled></option>
-                                     <option  [ngValue]="" selected>Seleccionar departamento</option>
+                                     <option  [ngValue]="0" selected>Seleccionar departamento</option>
                                       <option [ngValue]="item.departamentId" *ngFor="let item of departamnets">{{item.departamentDescripcion}}</option>
                                 </select>
-                            </div>
+                        </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-col-form-label">Sub Departamento: </label>
                         <div>
-                            <select class="form-select" id="subDepartament" name="subDepartament">
+                            <select class="form-select" id="subdepartamento" name="subdepartamento" [(ngModel)]="subdepartamento">
                                 <option [ngValue]="null" disabled></option>
-                                <option [ngValue]="" selected>Seleccionar departamento</option>
+                                <option [ngValue]="0" selected>Seleccionar departamento</option>
                                 <option [ngValue]="item.subDepartamentId" *ngFor="let item of subdepartements">{{item.subDepartamentDesc}}</option>
                           </select>
                         </div>
-                    </div>        
+                    </div>
                     <div class="row form-group">
                         <label class="col-sm-col-form-label">Descripción: </label>
                         <div>
-                            <input type="text" class="form-control" id="producto" name="producto" />
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="descripcion" />
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-col-form-label">Marca: </label>
                         <div>
-                            <select class="form-select" id="marca" name="marca">
+                            <select class="form-select" id="marca" name="marca" [(ngModel)]="marca">
                                 <option [ngValue]="null" disabled></option>
-                                <option [ngValue]="" selected>Seleccionar Marca</option>
+                                <option [ngValue]="0" selected>Seleccionar Marca</option>
                                 <option [ngValue]="item.marcaId" *ngFor="let item of marcasList">{{item.marcaDesc}}</option>
                           </select>
                         </div>
@@ -52,43 +52,43 @@
                     <div class="row form-group">
                         <label class="col-sm-col-form-label">Precio compra: </label>
                         <div>
-                            <input type="text" class="form-control" id="producto" name="producto" />
+                            <input type="text" class="form-control" id="precioCompra" name="precioCompra" [(ngModel)]="precioCompra" />
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-col-form-label">Precio Venta: </label>
                         <div>
-                            <input type="text" class="form-control" id="producto" name="producto" />
+                            <input type="text" class="form-control" id="precioVenta" name="precioVenta" [(ngModel)]="precioVenta" />
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-col-form-label">Impuesto: </label>
                         <div>
-                            <input type="text" class="form-control" id="producto" name="producto" />
+                            <input type="text" class="form-control" id="impuesto" name="impuesto" [(ngModel)]="impuesto" />
                         </div>
-                </div>
-                <div class="row form-group">
-                    <label class="col-sm-col-form-label">Precio Neto: </label>
-                    <div>
-                        <input type="text" class="form-control" id="producto" name="producto" />
                     </div>
-                 </div>
-                 <div class="row form-group">
-                    <label class="col-sm-col-form-label">Cantidad: </label>
-                    <div>
-                        <input type="number" class="form-control" id="producto" name="producto" />
+                    <div class="row form-group">
+                        <label class="col-sm-col-form-label">Precio Neto: </label>
+                        <div>
+                            <input type="text" class="form-control" id="precioNeto" name="precioNeto" [(ngModel)]="precioNeto" />
+                        </div>
                     </div>
-                 </div>
-                 <div class="row form-group  ">
-                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-outline-danger ">Cancelar</button>
-                        <button type="button" class="btn btn-outline-primary ">Agregar</button>
-                     </div>
-                 </div>
+                    <div class="row form-group">
+                        <label class="col-sm-col-form-label">Cantidad: </label>
+                        <div>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="cantidad" />
+                        </div>
+                    </div>
+                    <div class="row form-group  ">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-outline-danger ">Cancelar</button>
+                            <button type="submit" class="btn btn-outline-primary ">Agregar</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
-        
+
     </div>
-    
+
 </div>

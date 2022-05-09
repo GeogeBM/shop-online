@@ -43,3 +43,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+Back_end/shopInlineApi/.vs/shopInlineApi/v16/.suo

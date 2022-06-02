@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, enableProdMode } from '@angular/core';
 import { Departament } from 'src/app/models/departament';
 import { SubDepartament } from 'src/app/models/subdepartament';
 import { Marca } from 'src/app/models/marca';
@@ -12,7 +12,7 @@ import { ProductoService } from './producto.service';
 @Component({
   selector: 'app-load',
   templateUrl: './load.component.html',
-  styleUrls: ['./load.component.sass']
+  //styleUrls: ['./load.component.sass']
 })
 export class LoadComponent implements OnInit {
 
@@ -29,6 +29,7 @@ export class LoadComponent implements OnInit {
   impuesto: number = 0;
   precioNeto: number = 0;
   cantidad: number = 0;
+  imagen: string = "";
   productoModel: Producto =  new Producto();
   constructor(
     private departamentService: DepartamentService, 
@@ -69,6 +70,24 @@ export class LoadComponent implements OnInit {
     console.log('el evento mandado es: ', e.target.value);
   }
 
+  //cargar imagen
+  onFileChange(event: any){
+
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    console.log('la imagen que se mandara',file);
+    // if(file !== null || file != undefined){
+    
+    //  // reader.readAsDataURL(file);
+    //   reader.readAsText(file)
+    //   //this.imagen = reader.toString();
+    //   reader.onload = () => {
+    //     this.imagen = (reader.result) ? reader.result.toString(): "";
+    //   }
+    //}
+    
+  }
   //guardando el producto
   saveProducto(event: any){
     
@@ -84,6 +103,7 @@ export class LoadComponent implements OnInit {
     this.productoModel.ProductoImpuesto = this.impuesto;
     this.productoModel.PrecioNetoVenta = this.precioNeto;
     this.productoModel.ProductoCantidad = this.cantidad;
+    this.productoModel.ArchivoImagen = this.imagen;
 
     this.productoService.CreateProducto( this.productoModel).subscribe(data => {
       console.log('se guardaton satsfactoriamente los datos');

@@ -16,4 +16,14 @@ export class ProductoService {
       let url = 'Producto';
       return this.genericService.postReques(url,producto)
   }
+
+  CargarImagen(file:any){
+    let url = 'Producto/Uploadfile'
+
+    const formdata = new FormData();
+    formdata.append("Name","Prueba.jpg");
+    formdata.append("Emial","");
+    formdata.append("Picture",file);
+    return this.genericService.postFilesReques(url,formdata);
+  }
 }

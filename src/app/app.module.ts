@@ -16,7 +16,11 @@ import { LoadComponent } from './dashboard/load/load.component';
 import { ProductoService } from './services/producto/producto.service';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { LoadImagenComponent } from './componets/dashboard/load-imagen/load-imagen.component';
+import { LoadFileComponent } from './dashboard/load/load-file/load-file.component';
+import { FilesListComponent } from './dashboard/load/files-list/files-list.component';
+import { ArticulosListComponent } from './dashboard/load/articulos-list/articulos-list.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,11 @@ import { FormsModule } from '@angular/forms'
     BoyIndexComponent,
     GirlIndexComponent,
     CardComponent,
-    LoadComponent
+    LoadComponent,
+    LoadImagenComponent,
+    LoadFileComponent,
+    FilesListComponent,
+    ArticulosListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -18,6 +18,7 @@ namespace shopInlineApi.Models
         }
 
         public virtual DbSet<Accesorio> Accesorios { get; set; }
+        public virtual DbSet<ArticuloFile> ArticuloFiles { get; set; }
         public virtual DbSet<Bolsa> Bolsas { get; set; }
         public virtual DbSet<Calzado> Calzados { get; set; }
         public virtual DbSet<Departement> Departements { get; set; }
@@ -31,13 +32,13 @@ namespace shopInlineApi.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=JBETANCOURT;Initial Catalog=Shop_Online;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-UDQD1R6;Initial Catalog=Shop_Online;Integrated Security=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
             modelBuilder.Entity<Accesorio>(entity =>
             {
@@ -66,7 +67,48 @@ namespace shopInlineApi.Models
                     .WithMany(p => p.Accesorios)
                     .HasForeignKey(d => d.SubDepartamentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Accesorio__sub_d__5441852A");
+                    .HasConstraintName("FK__Accesorio__sub_d__534D60F1");
+            });
+
+            modelBuilder.Entity<ArticuloFile>(entity =>
+            {
+                entity.HasKey(e => e.Idfile)
+                    .HasName("PK__articulo__355717A9DB85E355");
+
+                entity.ToTable("articulo_file");
+
+                entity.Property(e => e.Idfile).HasColumnName("idfile");
+
+                entity.Property(e => e.CreateDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("create_date")
+                    .HasDefaultValueSql("('1900-01-01')");
+
+                entity.Property(e => e.FileData)
+                    .IsRequired()
+                    .IsUnicode(false)
+                    .HasColumnName("file_data")
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.FileNombre)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("file_nombre")
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.ModifyDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("modify_date")
+                    .HasDefaultValueSql("('1900-01-01')");
+
+                entity.Property(e => e.ProductoId).HasColumnName("producto_id");
+
+                entity.HasOne(d => d.Producto)
+                    .WithMany(p => p.ArticuloFiles)
+                    .HasForeignKey(d => d.ProductoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__articulo___produ__09A971A2");
             });
 
             modelBuilder.Entity<Bolsa>(entity =>
@@ -96,7 +138,7 @@ namespace shopInlineApi.Models
                     .WithMany(p => p.Bolsas)
                     .HasForeignKey(d => d.SubDepartamentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Bolsas__sub_depa__4E88ABD4");
+                    .HasConstraintName("FK__Bolsas__sub_depa__4D94879B");
             });
 
             modelBuilder.Entity<Calzado>(entity =>
@@ -128,13 +170,13 @@ namespace shopInlineApi.Models
                     .WithMany(p => p.Calzados)
                     .HasForeignKey(d => d.SubDepartamentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Calzado__sub_dep__48CFD27E");
+                    .HasConstraintName("FK__Calzado__sub_dep__47DBAE45");
             });
 
             modelBuilder.Entity<Departement>(entity =>
             {
                 entity.HasKey(e => e.DepartamentId)
-                    .HasName("PK__Departem__061E0A7BDC764417");
+                    .HasName("PK__Departem__061E0A7B0AAABC13");
 
                 entity.ToTable("Departement");
 
@@ -240,22 +282,22 @@ namespace shopInlineApi.Models
 
                 entity.Property(e => e.SubDepartamentId).HasColumnName("sub_departament_Id");
 
-                //entity.HasOne(d => d.Departament)
-                //    .WithMany(p => p.Productos)
-                //    .HasForeignKey(d => d.DepartamentId)
-                //    .HasConstraintName("FK__Producto__depart__5DCAEF64");
+                entity.HasOne(d => d.Departament)
+                    .WithMany(p => p.Productos)
+                    .HasForeignKey(d => d.DepartamentId)
+                    .HasConstraintName("FK__Producto__depart__5CD6CB2B");
 
-                //entity.HasOne(d => d.Marca)
-                //    .WithMany(p => p.Productos)
-                //    .HasForeignKey(d => d.MarcaId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK__Producto__marca___619B8048");
+                entity.HasOne(d => d.Marca)
+                    .WithMany(p => p.Productos)
+                    .HasForeignKey(d => d.MarcaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Producto__marca___60A75C0F");
 
-                //entity.HasOne(d => d.SubDepartament)
-                //    .WithMany(p => p.Productos)
-                //    .HasForeignKey(d => d.SubDepartamentId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK__Producto__sub_de__5EBF139D");
+                entity.HasOne(d => d.SubDepartament)
+                    .WithMany(p => p.Productos)
+                    .HasForeignKey(d => d.SubDepartamentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Producto__sub_de__5DCAEF64");
             });
 
             modelBuilder.Entity<Ropa>(entity =>
@@ -287,7 +329,7 @@ namespace shopInlineApi.Models
                     .WithMany(p => p.Ropas)
                     .HasForeignKey(d => d.SubDepartamentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ropa__sub_depart__4316F928");
+                    .HasConstraintName("FK__Ropa__sub_depart__4222D4EF");
             });
 
             modelBuilder.Entity<SubDepartament>(entity =>
@@ -318,7 +360,7 @@ namespace shopInlineApi.Models
                 entity.HasOne(d => d.Departament)
                     .WithMany(p => p.SubDepartaments)
                     .HasForeignKey(d => d.DepartamentId)
-                    .HasConstraintName("FK__Sub_Depar__Depar__3D5E1FD2");
+                    .HasConstraintName("FK__Sub_Depar__Depar__3C69FB99");
             });
 
             OnModelCreatingPartial(modelBuilder);

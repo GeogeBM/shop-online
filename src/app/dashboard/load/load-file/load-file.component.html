@@ -1,0 +1,11 @@
+<form #form="ngForm" (ngSubmit)="savefile(form.value)">
+    <div class="row form-group">
+        <label class="col-sm-col-form-label">Imagen: </label>
+        <div>
+            <input type="file" id="file" (change)="onFileChange($event)" class="custom-file-input" lang="es" />
+        </div>
+    </div>
+    <div class="row form-group">
+        <button type="submit" class="btn btn-outline-primary ">Agregar</button>
+    </div>
+</form>

@@ -18,5 +18,6 @@ namespace shopInlineApi.Entitys
     public decimal PrecioNetoVenta { get; set; }
     public decimal ProductoImpuesto { get; set; }
     public int ProductoCantidad { get; set; }
+    public string ArchivoImagen { get; set; }
   }
 }

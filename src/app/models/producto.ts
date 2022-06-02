@@ -12,7 +12,7 @@ export class Producto {
           ProductoImpuesto : number;
           ProductoImpuestoPorc : number;
           ProductoCantidad : number;
-
+          ArchivoImagen:string;
           constructor(){
               this.ProductoId = 0; 
                 this.DepartamentId = 0;
@@ -26,5 +26,6 @@ export class Producto {
                 this.ProductoImpuesto = 0;
                 this.ProductoImpuestoPorc = 0;
                 this.ProductoCantidad = 0;
+                this.ArchivoImagen = '';
           }
 }

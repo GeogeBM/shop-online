@@ -1,0 +1,1 @@
+ Scaffold-DbContext "Data Source=DESKTOP-UDQD1R6;Initial Catalog=Shop_Online;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables articulo_file, Accesorios, Bolsas,Calzado,Departement,Marca,Producto,Ropa,Sub_Departament -f

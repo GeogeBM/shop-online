@@ -7,6 +7,8 @@ import { GirlIndexComponent } from './components/girl/girl-index/girl-index.comp
 import { BoyIndexComponent } from './components/boy/boy-index/boy-index.component';
 import {OtherStyleComponent } from './components/other-style/other-style.component';
 import { LoadComponent } from './dashboard/load/load.component';
+import { LoadFileComponent } from './dashboard/load/load-file/load-file.component';
+import { FilesListComponent } from './dashboard/load/files-list/files-list.component';
 const routes: Routes = [
   {path:'home', component: HomeComponent},
   {
@@ -19,7 +21,9 @@ const routes: Routes = [
   {path:'nino', component: BoyIndexComponent},
   {path:'nina',component:GirlIndexComponent},
   {path:'otros',component:OtherStyleComponent},
-  {path:'producto',component:LoadComponent}
+  {path:'producto',component:LoadComponent},
+  {path:'loadfile', component:LoadFileComponent},
+  {path:'files',component:FilesListComponent}
 ];
 
 @NgModule({

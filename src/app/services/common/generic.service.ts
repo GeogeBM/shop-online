@@ -19,11 +19,12 @@ export class GenericService
     }
     
     public postReques(url:string, params:any){
-        console.log('url: ',url);
-        console.log('parametros: ',params);
-        return this.Execute(HttpRequestType.POST,url,params,params);
+        return this.Execute(HttpRequestType.POST,url,null,params);
     }
-    
+    public postFilesReques(url:string,params:any){
+        const headers = new HttpHeaders();
+        return this.Execute(HttpRequestType.POSTFILE,url,headers,params)
+    }
     public putRequest(url:string, params:any){
         return this.Execute(HttpRequestType.PUT,url,params);
     }
@@ -55,7 +56,8 @@ export class GenericService
             
             case HttpRequestType.POST:
                 return this.httpClient.post(URL,data,{headers:headers, params: queryParams} );
-                
+            case HttpRequestType.POSTFILE:
+                return this.httpClient.post(URL,data, {headers: new HttpHeaders()})
             case HttpRequestType.PUT:
                 return this.httpClient.put(url,{headers:headers, params:queryParams});
             
@@ -70,5 +72,6 @@ enum HttpRequestType{
     GET,
     POST,
     PUT,
-    DELETE
+    DELETE,
+    POSTFILE
     }
